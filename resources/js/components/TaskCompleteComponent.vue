@@ -9,7 +9,7 @@
                     <th scope="col">Person In Charge</th>
                     <th scope="col">Show</th>
                     <th scope="col">Edit</th>
-                    <th scope="col">Complete</th>
+                    <th scope="col">Cancel</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                         </router-link>
                     </td>
                     <td>
-                        <button class="btn btn-danger" @click="completeTask(task.id)">Complete</button>
+                        <button class="btn btn-danger" @click="cancelTask(task.id)">Cancel</button>
                     </td>
                 </tr>
             </tbody>
@@ -46,13 +46,13 @@ export default {
     },
     methods: {
         getTasks() {
-            axios.get('/api/tasks')
+            axios.get('/api/tasks/complete')
                 .then((res) => {
                     this.tasks = res.data
                 })
         },
-        completeTask(id) {
-            axios.put(`/api/tasks/${id}/complete`)
+        cancelTask(id) {
+            axios.put(`/api/tasks/complete/${id}`)
                 .then((res) => {
                     this.getTasks();
                 });

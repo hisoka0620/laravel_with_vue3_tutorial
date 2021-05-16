@@ -9,7 +9,7 @@ require('./bootstrap');
 // import { vue } from 'laravel-mix';
 
 // below this is Vue2 notaion
-// window.Vue = require('vue').default; 
+// window.Vue = require('vue').default;
 
 /**
  * The following block of code may be used to automatically register your
@@ -46,6 +46,7 @@ import {
 import ExampleComponent from './components/ExampleComponent.vue'
 import HeaderComponent from './components/HeaderComponent.vue'
 import TaskListComponent from './components/TaskListComponent.vue'
+import TaskCompleteComponent from './components/TaskCompleteComponent.vue'
 import TaskShowComponent from './components/TaskShowComponent.vue'
 import TaskCreateComponent from './components/TaskCreateComponent.vue'
 import TaskEditComponent from './components/TaskEditComponent.vue'
@@ -61,6 +62,11 @@ const router = createRouter({
             path: '/tasks',
             name: 'task.list',
             component: TaskListComponent
+        },
+        {
+            path: '/tasks/complete',
+            name: 'task.complete',
+            component: TaskCompleteComponent
         },
         {
             path: '/tasks/create',
