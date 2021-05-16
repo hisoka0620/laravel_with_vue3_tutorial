@@ -60,3 +60,22 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## start up
+
+git clone git@github.com:hisoka0620/laravel_with_vue3_tutorial.git
+
+composer install
+
+.envファイル作成（.env.exampleを丸々コピー）
+今回使用したのはsqliteなのでDBの設定をsqliteに変更（DB＿CONNECTION＝sqliteだけにする）
+databaseディレクトリ配下にdatabase.sqliteファイルの追加
+
+php artisan migrate --seed
+
+npm install
+
+npm run dev
+
+php artisan serve
+
