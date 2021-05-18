@@ -20,8 +20,6 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/tasks', [TaskController::class, 'index']);
 
-Route::get('/tasks/complete', [TaskController::class, 'getComplete']);
-
 Route::post('/tasks', [TaskController::class, 'store']);
 
 Route::get('/tasks/{task}', [TaskController::class, 'show']);

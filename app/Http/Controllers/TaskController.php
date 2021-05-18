@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        return Task::all()->where('confirmed', 0);
-    }
-
-    public function getComplete()
-    {
-        return Task::all()->where('confirmed', 1);
+        $completed = $request->query('completed');
+        $query = Task::query();
+        if (!is_null($completed)) {
+            $query = $query->where('confirmed', 1);
+        }
+        return $query->get();
     }
 
     public function show(Task $task)

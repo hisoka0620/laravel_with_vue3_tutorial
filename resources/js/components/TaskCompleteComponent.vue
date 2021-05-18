@@ -46,7 +46,7 @@ export default {
     },
     methods: {
         getTasks() {
-            axios.get('/api/tasks/complete')
+            axios.get('/api/tasks?completed=true')
                 .then((res) => {
                     this.tasks = res.data
                 })
