@@ -8,14 +8,17 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        return Task::all()->where('confirmed', 0);
-    }
-
-    public function getComplete()
-    {
-        return Task::all()->where('confirmed', 1);
+        $completed = $request->query('completed');
+        $query = Task::query();
+        if (!is_null($completed)) {
+            $query = $query->where('confirmed', 1)->get();
+            return $query;
+        } else {
+            $query = $query->where('confirmed', 0)->get();
+            return $query;
+        }
     }
 
     public function show(Task $task)
@@ -30,25 +33,18 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-        $task->update($request->all());
-
-        return $task;
-    }
-
-    public function completed(Task $task)
-    {
-        $task->confirmed = 1;
-        $task->save();
-
-        return $task;
-    }
-
-    public function cancelCompleted(Task $task)
-    {
-        $task->confirmed = 0;
-        $task->save();
-
-        return $task;
+        $completed = $request->query('completed');
+        if (empty($completed)) {
+            $task->update($request->all());
+        } else {
+            if ($completed == true) {
+                $task->confirmed = 1;
+                $task->save();
+            } else {
+                $task->confirmed = 0;
+                $task->save();
+            }
+        }
     }
 
     public function destroy(Task $task)

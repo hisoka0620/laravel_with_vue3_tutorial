@@ -29,7 +29,7 @@
                         </router-link>
                     </td>
                     <td>
-                        <button class="btn btn-danger" @click="cancelTask(task.id)">Cancel</button>
+                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancel</button>
                     </td>
                 </tr>
             </tbody>
@@ -46,13 +46,13 @@ export default {
     },
     methods: {
         getTasks() {
-            axios.get('/api/tasks/complete')
+            axios.get('/api/tasks?completed=true')
                 .then((res) => {
                     this.tasks = res.data
                 })
         },
-        cancelTask(id) {
-            axios.put(`/api/tasks/complete/${id}`)
+        cancelComplete(id) {
+            axios.put(`/api/tasks/${id}?completed=false`)
                 .then((res) => {
                     this.getTasks();
                 });

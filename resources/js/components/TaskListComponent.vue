@@ -52,7 +52,7 @@ export default {
                 })
         },
         completeTask(id) {
-            axios.put(`/api/tasks/${id}/complete`)
+            axios.put(`/api/tasks/${id}?completed=true`)
                 .then((res) => {
                     this.getTasks();
                 });

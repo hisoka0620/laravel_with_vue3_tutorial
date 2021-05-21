@@ -64,7 +64,7 @@ const router = createRouter({
             component: TaskListComponent
         },
         {
-            path: '/tasks/complete',
+            path: '/tasks?completed=true',
             name: 'task.complete',
             component: TaskCompleteComponent
         },
