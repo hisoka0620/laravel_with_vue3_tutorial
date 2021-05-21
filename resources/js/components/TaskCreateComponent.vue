@@ -33,6 +33,18 @@
                             v-model="task.person_in_charge"
                         />
                     </div>
+                    <div class="form-group row">
+                        <label
+                            for="deadtime"
+                            class="col-sm-3 col-form-label"
+                        >Deadtime</label>
+                        <input
+                            type="datetime-local"
+                            class="col-sm-9 form-control"
+                            id="deadtime"
+                            v-model="task.deadtime"
+                        />
+                    </div>
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                     <button class="btn btn-secondary" @click="createCancel">Cancel</button>
                 </form>

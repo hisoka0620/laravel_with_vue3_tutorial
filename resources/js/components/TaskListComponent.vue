@@ -7,6 +7,7 @@
                     <th scope="col">Title</th>
                     <th scope="col">Content</th>
                     <th scope="col">Person In Charge</th>
+                    <th scope="col">Deadtime</th>
                     <th scope="col">Show</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Complete</th>
@@ -18,6 +19,7 @@
                     <td>{{ task.title }}</td>
                     <td>{{ task.content }}</td>
                     <td>{{ task.person_in_charge }}</td>
+                    <td>{{ task.deadtime }}</td>
                     <td>
                         <router-link :to="{ name: 'task.show', params: { taskId: task.id } }">
                             <button class="btn btn-primary">Show</button>
@@ -52,7 +54,9 @@ export default {
                 })
         },
         completeTask(id) {
-            axios.put(`/api/tasks/${id}?completed=true`)
+            axios.put(`/api/tasks/${id}`,{
+                confirmed: 1
+            })
                 .then((res) => {
                     this.getTasks();
                 });
