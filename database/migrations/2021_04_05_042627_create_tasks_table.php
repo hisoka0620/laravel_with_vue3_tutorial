@@ -18,7 +18,6 @@ class CreateTasksTable extends Migration
 			$table->string('title', 100);
 			$table->string('content', 500);
 			$table->string('person_in_charge', 100);
-            $table->boolean('confirmed')->default(false);
 			$table->timestamps();
 		});
 	}
