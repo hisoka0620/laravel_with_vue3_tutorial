@@ -33,18 +33,9 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-        $completed = $request->query('completed');
-        if (empty($completed)) {
-            $task->update($request->all());
-        } else {
-            if ($completed == true) {
-                $task->confirmed = 1;
-                $task->save();
-            } else {
-                $task->confirmed = 0;
-                $task->save();
-            }
-        }
+        $task->update($request->all());
+        
+        return $task;
     }
 
     public function destroy(Task $task)
