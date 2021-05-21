@@ -12,5 +12,6 @@ class Task extends Model
 		'title',
 		'content',
 		'person_in_charge',
+        'confirmed'
 	];
 }

@@ -20,6 +20,7 @@ class TasksTableSeeder extends Seeder
 				'title' => 'title' . $i,
 				'content' => 'content' . $i,
 				'person_in_charge' => 'person_in_charge' . $i,
+                'confirmed' => 0
 			]);
 		}
 	}

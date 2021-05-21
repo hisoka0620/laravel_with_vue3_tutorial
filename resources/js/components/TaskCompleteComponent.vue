@@ -10,7 +10,7 @@
                     <th scope="col">Deadtime</th>
                     <th scope="col">Show</th>
                     <th scope="col">Edit</th>
-                    <th scope="col">Complete</th>
+                    <th scope="col">Cancel</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +31,7 @@
                         </router-link>
                     </td>
                     <td>
-                        <button class="btn btn-danger" @click="completeTask(task.id)">Complete</button>
+                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancel</button>
                     </td>
                 </tr>
             </tbody>
@@ -48,14 +48,14 @@ export default {
     },
     methods: {
         getTasks() {
-            axios.get('/api/tasks')
+            axios.get('/api/tasks?completed=true')
                 .then((res) => {
                     this.tasks = res.data
                 })
         },
-        completeTask(id) {
-            axios.put(`/api/tasks/${id}`,{
-                confirmed: 1
+        cancelComplete(id) {
+            axios.put(`/api/tasks/${id}`, {
+                confirmed: 0
             })
                 .then((res) => {
                     this.getTasks();

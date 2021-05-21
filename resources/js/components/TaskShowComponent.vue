@@ -42,12 +42,22 @@
             v-model="task.person_in_charge"
           />
         </div>
+        <div class="form-group row border-bottom">
+          <label for="deadtime" class="col-sm-3 col-form-label">deadtime</label>
+          <input
+            type="datetime-local"
+            class="col-sm-9 form-control-plaintext"
+            readonly
+            id="deadtime"
+            v-model="task.deadtime"
+          />
+        </div>
         <button class="btn btn-secondary" @click="backTaskList">Back</button>
       </div>
     </div>
   </div>
 </template>
- 
+
  <script>
 export default {
   props: {
