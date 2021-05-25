@@ -19,7 +19,7 @@
                     <td>{{ task.title }}</td>
                     <td>{{ task.content }}</td>
                     <td>{{ task.person_in_charge }}</td>
-                    <td>{{ task.deadline }}</td>
+                    <td :class="classObject(task.deadline)">{{ task.deadline }}</td>
                     <td>
                         <router-link :to="{ name: 'task.show', params: { taskId: task.id } }">
                             <button class="btn btn-primary">Show</button>
@@ -40,10 +40,13 @@
 </template>
 
  <script>
+import moment from 'moment'
+
 export default {
     data: function() {
         return {
-            tasks: []
+            tasks: [],
+            hasClass: false
         }
     },
     methods: {
@@ -60,6 +63,25 @@ export default {
                 .then((res) => {
                     this.getTasks();
                 });
+        }
+    },
+    computed: {
+        classObject: function() {
+            return function(value) {
+                const timezone = new Date();
+                const year = timezone.getFullYear();
+                const month = timezone.getMonth() + 1;
+                const day = timezone.getDate();
+                const hours = timezone.getHours();
+                const minutes = timezone.getMinutes();
+                const currentTime = `${year}-${month}-${day} ${hours}:${minutes}`;
+                const formatNow = moment(currentTime).format('yyyy-MM-DD HH:mm');
+                if (formatNow > value) {
+                    return {
+                        'text-danger': !this.hasClass
+                    }
+                }
+            }
         }
     },
     mounted() {

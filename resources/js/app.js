@@ -50,6 +50,7 @@ import TaskCompleteComponent from './components/TaskCompleteComponent.vue'
 import TaskShowComponent from './components/TaskShowComponent.vue'
 import TaskCreateComponent from './components/TaskCreateComponent.vue'
 import TaskEditComponent from './components/TaskEditComponent.vue'
+import TaskExpiredComponent from './components/TaskExpiredComponent.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -62,6 +63,11 @@ const router = createRouter({
             path: '/tasks',
             name: 'task.list',
             component: TaskListComponent
+        },
+        {
+            path: '/tasks?deadline=true',
+            name: 'task.expired',
+            component: TaskExpiredComponent
         },
         {
             path: '/tasks?completed=true',

@@ -6,6 +6,9 @@
                     <span class="navbar-brand mb-0 h1">Vue Laravel SPA</span>
                 </router-link>
                 <div>
+                    <router-link :to="{ name: 'task.expired' }">
+                        <button class="btn btn-success mr-2">expired</button>
+                    </router-link>
                     <router-link :to="{ name: 'task.complete' }">
                         <button class="btn btn-success mr-2">Complete</button>
                     </router-link>

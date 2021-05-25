@@ -85,8 +85,13 @@ export default {
         }
     },
     computed: {
-        getDeadline() {
-            return moment(this.task.deadline).format('YYYY-MM-DDTHH:mm');
+        getDeadline: {
+            get() {
+                return moment(this.task.deadline).format('YYYY-MM-DDTHH:mm')
+            },
+            set(value) {
+                this.task.deadline = moment(value).format('YYYY-MM-DD HH:mm:ss')
+            }
         }
     },
     mounted() {

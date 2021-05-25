@@ -86,6 +86,9 @@ export default {
             axios.put('/api/tasks/' + this.taskId, this.task)
                 .then((res) => {
                     this.$router.push({ name: 'task.list' });
+                })
+                .catch((error) => {
+                    console.log(error.response);
                 });
         },
         editCancel() {
@@ -93,8 +96,13 @@ export default {
         }
     },
     computed: {
-        getDeadline() {
-            return moment(this.task.deadline).format('YYYY-MM-DDTHH:mm');
+        getDeadline: {
+            get() {
+                return moment(this.task.deadline).format('YYYY-MM-DDTHH:mm')
+            },
+            set(value) {
+                this.task.deadline = moment(value).format('YYYY-MM-DD HH:mm:ss')
+            }
         }
     },
     mounted() {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -11,11 +12,18 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $completed = $request->query('completed');
+        $deadline = $request->query('deadline');
+        $now = Carbon::now()->toDateTimeString();
         $query = Task::query();
-        if (!is_null($completed)) {
+        if ($completed == true) {
             $query = $query->where('confirmed', 1)->get();
             return $query;
-        } else {
+        }
+        elseif($deadline == true){
+            $deadline_data = Task::where('deadline', '<', $now)->get();
+            return $deadline_data;
+        }
+        else {
             $query = $query->where('confirmed', 0)->get();
             return $query;
         }
