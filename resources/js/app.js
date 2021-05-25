@@ -43,6 +43,7 @@ import {
     createRouter,
     createWebHistory
 } from 'vue-router'
+import moment from 'moment'
 import ExampleComponent from './components/ExampleComponent.vue'
 import HeaderComponent from './components/HeaderComponent.vue'
 import TaskListComponent from './components/TaskListComponent.vue'
@@ -94,7 +95,25 @@ const router = createRouter({
     ]
 })
 
+const dangerMixin = {
+    computed: {
+        dangerClass: function () {
+            return function (value) {
+                const now = new Date();
+                const currentTime = moment(now).format('YYYY-MM-DD HH:mm')
+                if (currentTime > value) {
+                    return {
+                        'text-danger': !this.hasClass
+                    }
+                }
+            }
+        }
+    }
+}
+
 const app = createApp({})
+
+app.mixin(dangerMixin)
 
 app.component('header-component', HeaderComponent)
 

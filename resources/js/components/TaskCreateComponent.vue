@@ -43,6 +43,7 @@
                             class="col-sm-9 form-control"
                             id="deadtime"
                             v-model="task.deadline"
+                            required
                         />
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>

@@ -15,11 +15,11 @@ class TaskController extends Controller
         $deadline = $request->query('deadline');
         $now = Carbon::now()->toDateTimeString();
         $query = Task::query();
-        if ($completed == true) {
+        if (!is_null($completed)) {
             $query = $query->where('confirmed', 1)->get();
             return $query;
         }
-        elseif($deadline == true){
+        elseif(!is_null($deadline)){
             $deadline_data = Task::where('deadline', '<', $now)->get();
             return $deadline_data;
         }
