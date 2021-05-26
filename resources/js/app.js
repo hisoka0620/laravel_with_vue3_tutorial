@@ -101,10 +101,8 @@ const addClassMixin = {
             return function (value) {
                 const now = new Date();
                 const deadlinestr = moment(value).format('YYYY-MM-DD HH:mm:ss')
-                const parseNow = Date.parse(now);
-                const parseDeadline = Date.parse(deadlinestr);
-
-                if (parseNow > parseDeadline) {
+                const deadline = new Date(deadlinestr);
+                if (now > deadline) {
                     return {
                         'text-danger': !this.hasClass
                     }
