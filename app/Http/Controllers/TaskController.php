@@ -18,13 +18,13 @@ class TaskController extends Controller
         if (!is_null($completed)) {
             $query = $query->where('confirmed', 1)->get();
             return $query;
-        }
-        elseif(!is_null($deadline)){
-            $deadline_data = Task::where('deadline', '<', $now)->get();
-            return $deadline_data;
-        }
-        else {
-            $query = $query->where('confirmed', 0)->get();
+        } elseif (!is_null($deadline)) {
+            $query = Task::where('deadline', '<', $now)->get();
+            return $query;
+        } else {
+            $query = $query->where('confirmed', 0)->where('deadline', '>', $now)->orWhere(function ($query) {
+                $query->where('confirmed', 0)->where('deadline', null);
+            })->get();
             return $query;
         }
     }

@@ -7,7 +7,7 @@
                 </router-link>
                 <div>
                     <router-link :to="{ name: 'task.expired' }">
-                        <button class="btn btn-success mr-2">expired</button>
+                        <button class="btn btn-success mr-2">Expired</button>
                     </router-link>
                     <router-link :to="{ name: 'task.complete' }">
                         <button class="btn btn-success mr-2">Complete</button>

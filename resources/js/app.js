@@ -95,13 +95,16 @@ const router = createRouter({
     ]
 })
 
-const dangerMixin = {
+const addClassMixin = {
     computed: {
         dangerClass: function () {
             return function (value) {
                 const now = new Date();
-                const currentTime = moment(now).format('YYYY-MM-DD HH:mm')
-                if (currentTime > value) {
+                const deadlinestr = moment(value).format('YYYY-MM-DD HH:mm:ss')
+                const parseNow = Date.parse(now);
+                const parseDeadline = Date.parse(deadlinestr);
+
+                if (parseNow > parseDeadline) {
                     return {
                         'text-danger': !this.hasClass
                     }
@@ -113,7 +116,7 @@ const dangerMixin = {
 
 const app = createApp({})
 
-app.mixin(dangerMixin)
+app.mixin(addClassMixin)
 
 app.component('header-component', HeaderComponent)
 

@@ -14,7 +14,7 @@ class CreateAddDeadlineToTasks extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->dateTime('deadline')->default(\Carbon\Carbon::now());
+            $table->dateTime('deadline')->nullable()->default(null);
         });
     }
 
