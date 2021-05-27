@@ -7,10 +7,10 @@
                     <th scope="col">Title</th>
                     <th scope="col">Content</th>
                     <th scope="col">Person In Charge</th>
-                    <th scope="col">Deadtime</th>
+                    <th scope="col">Deadline</th>
                     <th scope="col">Show</th>
                     <th scope="col">Edit</th>
-                    <th scope="col">Cancel</th>
+                    <th scope="col">Cancellation</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +19,7 @@
                     <td>{{ task.title }}</td>
                     <td>{{ task.content }}</td>
                     <td>{{ task.person_in_charge }}</td>
-                    <td>{{ task.deadtime }}</td>
+                    <td :class="dangerClass(task.deadline)">{{ task.deadline }}</td>
                     <td>
                         <router-link :to="{ name: 'task.show', params: { taskId: task.id } }">
                             <button class="btn btn-primary">Show</button>
@@ -31,7 +31,7 @@
                         </router-link>
                     </td>
                     <td>
-                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancel</button>
+                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancellation</button>
                     </td>
                 </tr>
             </tbody>
@@ -43,7 +43,8 @@
 export default {
     data: function() {
         return {
-            tasks: []
+            tasks: [],
+            hasClass: false
         }
     },
     methods: {

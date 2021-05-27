@@ -10,8 +10,7 @@
                     <th scope="col">Deadline</th>
                     <th scope="col">Show</th>
                     <th scope="col">Edit</th>
-                    <th scope="col">Complete</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Cancellation</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,10 +31,7 @@
                         </router-link>
                     </td>
                     <td>
-                        <button class="btn btn-secondary" @click="completeTask(task.id)">Complete</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger" @click="deleteTask(task.id)">Delete</button>
+                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancellation</button>
                     </td>
                 </tr>
             </tbody>
@@ -53,21 +49,15 @@ export default {
     },
     methods: {
         getTasks() {
-            axios.get('/api/tasks')
+            axios.get('/api/tasks?deadline=true')
                 .then((res) => {
                     this.tasks = res.data
                 })
         },
-        completeTask(id) {
+        cancelComplete(id) {
             axios.put(`/api/tasks/${id}`, {
-                confirmed: 1
+                confirmed: 0
             })
-                .then((res) => {
-                    this.getTasks();
-                });
-        },
-        deleteTask(id) {
-            axios.delete('/api/tasks/' + id)
                 .then((res) => {
                     this.getTasks();
                 });
