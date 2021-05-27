@@ -22,8 +22,8 @@ class TaskController extends Controller
             $query = Task::where('deadline', '<', $now)->get();
             return $query;
         } else {
-            $query = $query->where('confirmed', 0)->where('deadline', '>', $now)->orWhere(function ($query) {
-                $query->where('confirmed', 0)->where('deadline', null);
+            $query = $query->where('confirmed', 0)->where(function ($query) use ($now) {
+                $query->where('deadline', '>', $now)->orWhere('deadline', null);
             })->get();
             return $query;
         }
