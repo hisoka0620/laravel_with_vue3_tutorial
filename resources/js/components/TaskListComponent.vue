@@ -3,39 +3,46 @@
         <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Content</th>
                     <th scope="col">Person In Charge</th>
                     <th scope="col">Deadline</th>
-                    <th scope="col">Show</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Complete</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Created_at</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(task,index) in tasks" :key="index">
-                    <th scope="row">{{ task.id }}</th>
-                    <td>{{ task.title }}</td>
+                    <router-link :to="{ name: 'task.show', params: { taskId: task.id } }">
+                        <td>{{ task.title }}</td>
+                    </router-link>
                     <td>{{ task.content }}</td>
                     <td>{{ task.person_in_charge }}</td>
                     <td :class="dangerClass(task.deadline)">{{ task.deadline }}</td>
+                    <td>{{ createTime(task.created_at) }}</td>
                     <td>
-                        <router-link :to="{ name: 'task.show', params: { taskId: task.id } }">
-                            <button class="btn btn-primary">Show</button>
-                        </router-link>
-                    </td>
-                    <td>
-                        <router-link :to="{ name: 'task.edit', params: { taskId: task.id } }">
-                            <button class="btn btn-success">Edit</button>
-                        </router-link>
-                    </td>
-                    <td>
-                        <button class="btn btn-secondary" @click="completeTask(task.id)">Complete</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger" @click="deleteTask(task.id)">Delete</button>
+                        <div class="btn-group dropend">
+                            <button
+                                type="button"
+                                class="btn btn-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >･･･</button>
+                            <ul class="dropdown-menu">
+                                <li class="pl-2 pb-1">
+                                    <button
+                                        class="btn btn-secondary"
+                                        @click="completeTask(task.id)"
+                                    >Complete</button>
+                                </li>
+                                <li class="pl-2">
+                                    <button
+                                        class="btn btn-danger"
+                                        @click="deleteTask(task.id)"
+                                    >Delete</button>
+                                </li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -44,6 +51,8 @@
 </template>
 
  <script>
+import moment from 'moment-timezone'
+
 export default {
     data: function() {
         return {
@@ -71,6 +80,9 @@ export default {
                 .then((res) => {
                     this.getTasks();
                 });
+        },
+         createTime(val){
+            return moment(val).tz("Asia/Tokyo").format('YYYY:MM:DD HH:mm:ss')
         }
     },
     mounted() {
