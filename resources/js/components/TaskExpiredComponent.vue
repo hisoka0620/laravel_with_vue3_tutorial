@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(task,index) in tasks" :key="index">
+                <tr v-for="(task,index) in sort_tasks" :key="index">
                     <router-link :to="{ name: 'task.show', params: { taskId: task.id } }">
                         <td>{{ task.title }}</td>
                     </router-link>
@@ -96,7 +96,7 @@ export default {
         show(){
             return this.tasks.length > 0 ? true : false
         },
-        tasks() {
+        sort_tasks() {
             if (this.sort_key !== "") {
                 let set = 1
                 this.sort_asc ? (set = -1) : (set = 1)
