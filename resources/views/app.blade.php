@@ -17,6 +17,9 @@
             font-family: 'Nunito', sans-serif;
             text-align: center;
         }
+        .sort::after{
+            content: " ↕︎"
+        }
         .asc::after{
             content: "↓";
         }

@@ -8,11 +8,13 @@
                     <th scope="col">Person In Charge</th>
                     <th
                         scope="col"
+                        class="sort"
                         :class="addClass('deadline')"
                         @click="sortBy('deadline')"
                     >Deadline</th>
                     <th
                         scope="col"
+                        class="sort"
                         :class="addClass('created_at')"
                         @click="sortBy('created_at')"
                     >Created_at</th>
