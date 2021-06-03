@@ -6,8 +6,16 @@
                     <th scope="col">Title</th>
                     <th scope="col">Content</th>
                     <th scope="col">Person In Charge</th>
-                    <th scope="col" :class="addClass('deadline')" @click="sortBy('deadline')">Deadline</th>
-                    <th scope="col" :class="addClass('created_at')" @click="sortBy('created_at')">Created_at</th>
+                    <th
+                        scope="col"
+                        :class="addClass('deadline')"
+                        @click="sortBy('deadline')"
+                    >Deadline</th>
+                    <th
+                        scope="col"
+                        :class="addClass('created_at')"
+                        @click="sortBy('created_at')"
+                    >Created_at</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -115,7 +123,7 @@ export default {
             this.sort_key === key ? (this.sort_asc = !this.sort_asc) : (this.sort_asc = true)
             this.sort_key = key
         },
-        addClass(key){
+        addClass(key) {
             return {
                 asc: this.sort_key === key && this.sort_asc,
                 desc: this.sort_key === key && !this.sort_asc

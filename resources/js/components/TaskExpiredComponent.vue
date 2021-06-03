@@ -6,8 +6,16 @@
                     <th scope="col">Title</th>
                     <th scope="col">Content</th>
                     <th scope="col">Person In Charge</th>
-                    <th scope="col" :class="addClass('deadline')" @click="sortBy('deadline')">Deadline</th>
-                    <th scope="col" :class="addClass('created_at')" @click="sortBy('created_at')">Created_at</th>
+                    <th
+                        scope="col"
+                        :class="addClass('deadline')"
+                        @click="sortBy('deadline')"
+                    >Deadline</th>
+                    <th
+                        scope="col"
+                        :class="addClass('created_at')"
+                        @click="sortBy('created_at')"
+                    >Created_at</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -29,18 +37,32 @@
 
         <nav aria-label="..." v-show="show">
             <ul class="pagination justify-content-center">
-                <li class="page-item" :class="{disabled: currentPage == 1}">
-                    <a class="page-link" href="#" tabindex="-1" @click="getTasks(currentPage - 1)">Previous</a>
+                <li class="page-item" :class="{ disabled: currentPage == 1 }">
+                    <router-link :to="{ name: 'task.expired', params: { page: currentPage - 1 } }">
+                        <button
+                            class="page-link"
+                            tabindex="-1"
+                            @click="getTasks(currentPage - 1)"
+                        >Previous</button>
+                    </router-link>
                 </li>
-                <li v-for="(page, index) in pages" :key="index" class="page-item" :class="{active: page == currentPage}">
-                    <a href="#" class="page-link" @click="getTasks(page)">{{ page }}</a>
+                <li
+                    v-for="(page, index) in pages"
+                    :key="index"
+                    class="page-item"
+                    :class="{ active: page == currentPage }"
+                >
+                    <router-link :to="{ name: 'task.expired', params: { page: page } }">
+                        <button class="page-link" @click="getTasks(page)">{{ page }}</button>
+                    </router-link>
                 </li>
-                <li class="page-item" :class="{disabled: currentPage == lastPage}">
-                    <a class="page-link" href="#" @click="getTasks(currentPage + 1)">Next</a>
+                <li class="page-item" :class="{ disabled: currentPage == lastPage }">
+                    <router-link :to="{ name: 'task.expired', params: { page: currentPage + 1 } }">
+                        <button class="page-link" @click="getTasks(currentPage + 1)">Next</button>
+                    </router-link>
                 </li>
             </ul>
         </nav>
-
     </div>
 </template>
 
@@ -75,14 +97,14 @@ export default {
                     this.getTasks();
                 });
         },
-        createTime(val){
+        createTime(val) {
             return moment(val).tz('Asia/Tokyo').format('YYYY-MM-DD HH:mm:ss')
         },
         sortBy(key) {
             this.sort_key === key ? (this.sort_asc = !this.sort_asc) : (this.sort_asc = true)
             this.sort_key = key
         },
-        addClass(key){
+        addClass(key) {
             return {
                 asc: this.sort_key === key && this.sort_asc,
                 desc: this.sort_key === key && !this.sort_asc
@@ -90,10 +112,10 @@ export default {
         }
     },
     computed: {
-        pages(){
+        pages() {
             return this.pageCount
         },
-        show(){
+        show() {
             return this.tasks.length > 0 ? true : false
         },
         sort_tasks() {
