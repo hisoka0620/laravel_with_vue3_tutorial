@@ -37,12 +37,12 @@
                         <label
                             for="deadtime"
                             class="col-sm-3 col-form-label"
-                        >Deadtime</label>
+                        >Deadline</label>
                         <input
                             type="datetime-local"
                             class="col-sm-9 form-control"
                             id="deadtime"
-                            v-model="task.deadtime"
+                            v-model="task.deadline"
                         />
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
