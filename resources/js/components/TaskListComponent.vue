@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(task,index) in sort_tasks" :key="index">
+                <tr v-for="(task,index) in sortTasks" :key="index">
                     <router-link :to="{ name: 'task.show', params: { taskId: task.id } }">
                         <td>{{ task.title }}</td>
                     </router-link>
@@ -34,19 +34,27 @@
                         <div class="dropdown">
                             <button
                                 type="button"
-                                class="btn btn-secondary dropdown-toggle"
-                                id="dropdownMenuButton"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
+                                class="btn btn-light dropdown-toggle"
+                                id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >･･･</button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button
-                                    class="btn btn-primary"
-                                    @click="completeTask(task.id)"
-                                >Complete</button>
-                                <button class="btn btn-danger" @click="deleteTask(task.id)">Delete</button>
-                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="#"
+                                        @click="completeTask(task.id)"
+                                    >Complete</a>
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="#"
+                                        @click="deleteTask(task.id)"
+                                    >Delete</a>
+                                </li>
+                            </ul>
                         </div>
                     </td>
                 </tr>
@@ -56,12 +64,13 @@
         <nav aria-label="..." v-show="show">
             <ul class="pagination justify-content-center">
                 <li class="page-item" :class="{ disabled: currentPage == 1 }">
-                    <a
-                        class="page-link"
-                        href="#"
-                        tabindex="-1"
-                        @click="getTasks(currentPage - 1)"
-                    >Previous</a>
+                    <router-link :to="{ name: 'task.list', params: { page: currentPage - 1 } }">
+                        <button
+                            class="page-link"
+                            tabindex="-1"
+                            @click="getTasks(currentPage - 1)"
+                        >Previous</button>
+                    </router-link>
                 </li>
                 <li
                     v-for="(page, index) in pages"
@@ -69,10 +78,14 @@
                     class="page-item"
                     :class="{ active: page == currentPage }"
                 >
-                    <a href="#" class="page-link" @click="getTasks(page)">{{ page }}</a>
+                    <router-link :to="{ name: 'task.list', params: { page: page } }">
+                        <button class="page-link" @click="getTasks(page)">{{ page }}</button>
+                    </router-link>
                 </li>
                 <li class="page-item" :class="{ disabled: currentPage == lastPage }">
-                    <a class="page-link" href="#" @click="getTasks(currentPage + 1)">Next</a>
+                    <router-link :to="{ name: 'task.list', params: { page: currentPage + 1 } }">
+                        <button class="page-link" @click="getTasks(currentPage + 1)">Next</button>
+                    </router-link>
                 </li>
             </ul>
         </nav>
@@ -139,7 +152,7 @@ export default {
         show() {
             return this.tasks.length > 0 ? true : false
         },
-        sort_tasks() {
+        sortTasks() {
             if (this.sort_key !== "") {
                 let set = 1
                 this.sort_asc ? (set = -1) : (set = 1)

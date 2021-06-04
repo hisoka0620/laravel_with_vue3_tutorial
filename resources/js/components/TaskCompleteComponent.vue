@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(task,index) in sort_tasks" :key="index">
+                <tr v-for="(task,index) in sortTasks" :key="index">
                     <td>
                         <router-link
                             :to="{ name: 'task.show', params: { taskId: task.id } }"
@@ -33,7 +33,7 @@
                     <td :class="dangerClass(task.deadline)">{{ task.deadline }}</td>
                     <td>{{ createTime(task.created_at) }}</td>
                     <td>
-                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancellation</button>
+                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancel</button>
                     </td>
                 </tr>
             </tbody>
@@ -124,7 +124,7 @@ export default {
         show() {
             return this.tasks.length > 0 ? true : false
         },
-        sort_tasks() {
+        sortTasks() {
             if (this.sort_key !== "") {
                 let set = 1
                 this.sort_asc ? (set = -1) : (set = 1)
