@@ -12,11 +12,6 @@ class Task extends Model
 		'title',
 		'content',
 		'person_in_charge',
-        'confirmed',
-        'deadline'
+        'confirmed'
 	];
-
-    protected $casts = [
-        'deadline' => 'datetime:Y-m-d H:i'
-    ];
 }
