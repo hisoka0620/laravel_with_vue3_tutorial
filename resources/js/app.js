@@ -43,6 +43,7 @@ import {
     createRouter,
     createWebHistory
 } from 'vue-router'
+import moment from 'moment'
 import ExampleComponent from './components/ExampleComponent.vue'
 import HeaderComponent from './components/HeaderComponent.vue'
 import TaskListComponent from './components/TaskListComponent.vue'
@@ -50,6 +51,7 @@ import TaskCompleteComponent from './components/TaskCompleteComponent.vue'
 import TaskShowComponent from './components/TaskShowComponent.vue'
 import TaskCreateComponent from './components/TaskCreateComponent.vue'
 import TaskEditComponent from './components/TaskEditComponent.vue'
+import TaskExpiredComponent from './components/TaskExpiredComponent.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -62,6 +64,11 @@ const router = createRouter({
             path: '/tasks',
             name: 'task.list',
             component: TaskListComponent
+        },
+        {
+            path: '/tasks?deadline=true',
+            name: 'task.expired',
+            component: TaskExpiredComponent
         },
         {
             path: '/tasks?completed=true',
@@ -88,7 +95,26 @@ const router = createRouter({
     ]
 })
 
+const addClassMixin = {
+    computed: {
+        dangerClass: function () {
+            return function (value) {
+                const now = new Date();
+                const deadlinestr = moment(value).format('YYYY-MM-DD HH:mm:ss')
+                const deadline = new Date(deadlinestr);
+                if (now > deadline) {
+                    return {
+                        'text-danger': !this.hasClass
+                    }
+                }
+            }
+        }
+    }
+}
+
 const app = createApp({})
+
+app.mixin(addClassMixin)
 
 app.component('header-component', HeaderComponent)
 

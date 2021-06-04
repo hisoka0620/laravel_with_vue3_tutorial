@@ -27,6 +27,8 @@
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
+        "moment": "^2.29.1",
+        "moment-timezone": "^0.5.33",
         "vue-router": "^4.0.5"
     }
 }
