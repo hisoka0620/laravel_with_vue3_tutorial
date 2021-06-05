@@ -22,6 +22,9 @@ export default {
         return {
             message
         }
+    },
+    mounted() {
+        console.log('Component mounted.')
     }
 }
 </script>

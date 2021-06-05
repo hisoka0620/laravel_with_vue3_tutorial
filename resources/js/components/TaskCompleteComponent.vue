@@ -33,7 +33,7 @@
                     <td :class="dangerClass(task.deadline)">{{ task.deadline }}</td>
                     <td>{{ createTime(task.created_at) }}</td>
                     <td>
-                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancel</button>
+                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancellation</button>
                     </td>
                 </tr>
             </tbody>
