@@ -58,7 +58,11 @@ export default {
     computed: {
         getDeadline: {
             get() {
-                return moment(this.task.deadline).format('YYYY-MM-DD HH:mm')
+                if(this.task.deadline == null){
+                    return null
+                }else{
+                    return moment(this.task.deadline).format('YYYY-MM-DD HH:mm')
+                }
             }
         }
     },
