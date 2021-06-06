@@ -103,8 +103,8 @@ export default {
             pageCount: '',
             currentPage: 1,
             lastPage: null,
-            sort_key: "",
-            sort_asc: true
+            sortKey: "",
+            sortAsc: true
         }
     },
     methods: {
@@ -135,13 +135,15 @@ export default {
             return moment(val).tz("Asia/Tokyo").format('YYYY-MM-DD HH:mm:ss')
         },
         sortBy(key) {
-            this.sort_key === key ? (this.sort_asc = !this.sort_asc) : (this.sort_asc = true)
-            this.sort_key = key
+            if(this.sortKey == key){
+                this.sortAsc = !this.sortAsc
+            }
+                this.sortKey = key
         },
         addClass(key) {
             return {
-                asc: this.sort_key === key && this.sort_asc,
-                desc: this.sort_key === key && !this.sort_asc
+                asc: this.sortKey == key && this.sortAsc,
+                desc: this.sortKey == key && !this.sortAsc
             }
         }
     },
@@ -153,14 +155,16 @@ export default {
             return this.tasks.length > 0 ? true : false
         },
         sortTasks() {
-            if (this.sort_key !== "") {
+            if (this.sortKey !== "") {
                 let set = 1
-                this.sort_asc ? (set = -1) : (set = 1)
+                if(this.sortAsc){
+                    set = -1
+                }
                 this.tasks.sort((a, b) => {
-                    if (a[this.sort_key] < b[this.sort_key]) {
+                    if (a[this.sortKey] < b[this.sortKey]) {
                         return -1 * set
                     }
-                    if (a[this.sort_key] > b[this.sort_key]) {
+                    if (a[this.sortKey] > b[this.sortKey]) {
                         return 1 * set
                     }
                     return 0
