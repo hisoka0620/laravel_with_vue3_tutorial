@@ -102,29 +102,6 @@ export default {
                 .then((res) => {
                     this.getTasks();
                 });
-        },
-        createTime(val) {
-            return moment(val).tz('Asia/Tokyo').format('YYYY-MM-DD HH:mm:ss')
-        },
-        sortBy(key) {
-            if(this.sortKey == key){
-                this.sortAsc = !this.sortAsc
-            }
-            this.sortKey = key
-        },
-        addClass(key) {
-            return {
-                asc: this.sortKey === key && this.sortAsc,
-                desc: this.sortKey === key && !this.sortAsc
-            }
-        }
-    },
-    computed: {
-        pages() {
-            return this.pageCount
-        },
-        show() {
-            return this.tasks.length > 0 ? true : false
         }
     },
     mounted() {
