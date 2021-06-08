@@ -95,7 +95,24 @@ const router = createRouter({
     ]
 })
 
-const addClassMixin = {
+const myMixin = {
+    methods: {
+        sortBy(key) {
+            if (this.sortKey == key) {
+                this.sortAsc = !this.sortAsc
+            }
+            this.sortKey = key
+        },
+        addClass(key) {
+            return {
+                asc: this.sortKey == key && this.sortAsc,
+                desc: this.sortKey == key && !this.sortAsc
+            }
+        },
+        createTime(val) {
+            return moment(val).tz('Asia/Tokyo').format('YYYY-MM-DD HH:mm:ss')
+        }
+    },
     computed: {
         dangerClass: function () {
             return function (value) {
@@ -108,13 +125,39 @@ const addClassMixin = {
                     }
                 }
             }
+        },
+        sortTasks() {
+            if (this.sortKey !== "") {
+                let set = 1
+                if (this.sortAsc) {
+                    set = -1
+                }
+                this.tasks.sort((a, b) => {
+                    if (a[this.sortKey] < b[this.sortKey]) {
+                        return -1 * set
+                    }
+                    if (a[this.sortKey] > b[this.sortKey]) {
+                        return 1 * set
+                    }
+                    return 0
+                })
+                return this.tasks
+            } else {
+                return this.tasks
+            }
+        },
+        pages() {
+            return this.pageCount
+        },
+        show() {
+            return this.tasks.length > 0 ? true : false
         }
     }
 }
 
 const app = createApp({})
 
-app.mixin(addClassMixin)
+app.mixin(myMixin)
 
 app.component('header-component', HeaderComponent)
 
