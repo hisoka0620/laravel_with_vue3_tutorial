@@ -112,9 +112,34 @@ const addClassMixin = {
     }
 }
 
+const sortTasksMixin = {
+    computed: {
+        sortTasks() {
+            if (this.sortKey !== "") {
+                let set = 1
+                if (this.sortAsc) {
+                    set = -1
+                }
+                this.tasks.sort((a, b) => {
+                    if (a[this.sortKey] < b[this.sortKey]) {
+                        return -1 * set
+                    }
+                    if (a[this.sortKey] > b[this.sortKey]) {
+                        return 1 * set
+                    }
+                    return 0
+                })
+                return this.tasks
+            } else {
+                return this.tasks
+            }
+        }
+    }
+}
+
 const app = createApp({})
 
-app.mixin(addClassMixin)
+app.mixin(addClassMixin).mixin(sortTasksMixin)
 
 app.component('header-component', HeaderComponent)
 

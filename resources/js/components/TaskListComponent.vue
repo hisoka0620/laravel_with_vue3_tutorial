@@ -153,30 +153,7 @@ export default {
         },
         show() {
             return this.tasks.length > 0 ? true : false
-        },
-        sortTasks() {
-            if (this.sortKey !== "") {
-                let set = 1
-                if(this.sortAsc){
-                    set = -1
-                }
-                this.tasks.sort((a, b) => {
-                    if (a[this.sortKey] < b[this.sortKey]) {
-                        return -1 * set
-                    }
-                    if (a[this.sortKey] > b[this.sortKey]) {
-                        return 1 * set
-                    }
-                    return 0
-                })
-                return this.tasks
-            } else {
-                return this.tasks
-            }
         }
-    },
-    watch: {
-
     },
     mounted() {
         this.getTasks(this.currentPage)
