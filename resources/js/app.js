@@ -46,12 +46,13 @@ import {
 import moment from 'moment'
 import ExampleComponent from './components/ExampleComponent.vue'
 import HeaderComponent from './components/HeaderComponent.vue'
-import TaskListComponent from './components/TaskListComponent.vue'
-import TaskCompleteComponent from './components/TaskCompleteComponent.vue'
-import TaskShowComponent from './components/TaskShowComponent.vue'
-import TaskCreateComponent from './components/TaskCreateComponent.vue'
-import TaskEditComponent from './components/TaskEditComponent.vue'
-import TaskExpiredComponent from './components/TaskExpiredComponent.vue'
+import TaskListComponent from './components/TaskComponents/TaskListComponent.vue'
+import TaskCompleteComponent from './components/TaskComponents/TaskCompleteComponent.vue'
+import TaskShowComponent from './components/TaskComponents/TaskShowComponent.vue'
+import TaskCreateComponent from './components/TaskComponents/TaskCreateComponent.vue'
+import TaskEditComponent from './components/TaskComponents/TaskEditComponent.vue'
+import TaskExpiredComponent from './components/TaskComponents/TaskExpiredComponent.vue'
+import SignupComponent from './components/SignupComponent.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -61,19 +62,24 @@ const router = createRouter({
             component: ExampleComponent
         },
         {
+            path: '/signup',
+            name: 'signup',
+            component: SignupComponent,
+        },
+        {
             path: '/tasks',
             name: 'task.list',
             component: TaskListComponent
         },
         {
-            path: '/tasks?deadline=true',
-            name: 'task.expired',
-            component: TaskExpiredComponent
+            path: '/tasks',
+            name: 'task.complete',
+            component: TaskCompleteComponent,
         },
         {
-            path: '/tasks?completed=true',
-            name: 'task.complete',
-            component: TaskCompleteComponent
+            path: '/tasks',
+            name: 'task.expired',
+            component: TaskExpiredComponent,
         },
         {
             path: '/tasks/create',
@@ -91,7 +97,7 @@ const router = createRouter({
             name: 'task.edit',
             component: TaskEditComponent,
             props: true
-        }
+        },
     ]
 })
 

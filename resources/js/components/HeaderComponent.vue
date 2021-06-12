@@ -6,17 +6,22 @@
                     <span class="navbar-brand mb-0 h1">Vue Laravel SPA</span>
                 </router-link>
                 <div>
-                    <router-link :to="{ name: 'task.expired' }">
+                    <router-link :to="{ name: 'task.expired', query: { expired: true, page: 1 } }">
                         <button class="btn btn-success mr-2">Expired</button>
                     </router-link>
-                    <router-link :to="{ name: 'task.complete' }">
+                    <router-link
+                        :to="{ name: 'task.complete', query: { completed: true, page: 1 } }"
+                    >
                         <button class="btn btn-success mr-2">Complete</button>
                     </router-link>
-                    <router-link :to="{ name: 'task.list' }">
+                    <router-link :to="{ name: 'task.list', query: { page: 1 } }">
                         <button class="btn btn-success mr-2">List</button>
                     </router-link>
                     <router-link :to="{ name: 'task.create' }">
-                        <button class="btn btn-success">ADD</button>
+                        <button class="btn btn-success mr-2">ADD</button>
+                    </router-link>
+                    <router-link :to="{ name: 'signup'}">
+                        <button class="btn btn-success">Signup</button>
                     </router-link>
                 </div>
             </nav>
