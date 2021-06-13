@@ -12,7 +12,7 @@
                             v-model="user.user_id"
                         />
                     </div>
-                    <div v-if="hasError('user_id') == false" class="row">
+                    <div v-if="hasError('user_id')" class="row">
                         <div class="col-sm-3"></div>
                         <div class="error-message col-sm-9 px-0">
                             <p class="text-danger text-left">{{ errorContents('user_id') }}</p>
@@ -28,7 +28,7 @@
                             v-model="user.email"
                         />
                     </div>
-                    <div v-if="hasError('email') == false" class="row">
+                    <div v-if="hasError('email')" class="row">
                         <div class="col-sm-3"></div>
                         <div class="error-message col-sm-9 px-0">
                             <p class="text-danger text-left">{{ errorContents('email') }}</p>
@@ -44,7 +44,7 @@
                             v-model="user.last_name"
                         />
                     </div>
-                    <div v-if="hasError('last_name') == false" class="row">
+                    <div v-if="hasError('last_name')" class="row">
                         <div class="col-sm-3"></div>
                         <div class="error-message col-sm-9 px-0">
                             <p class="text-danger text-left">{{ errorContents('last_name') }}</p>
@@ -60,7 +60,7 @@
                             v-model="user.first_name"
                         />
                     </div>
-                    <div v-if="hasError('first_name') == false" class="row">
+                    <div v-if="hasError('first_name')" class="row">
                         <div class="col-sm-3"></div>
                         <div class="error-message col-sm-9 px-0">
                             <p class="text-danger text-left">{{ errorContents('first_name') }}</p>
@@ -76,7 +76,7 @@
                             v-model="user.password"
                         />
                     </div>
-                    <div v-if="hasError('password') == false" class="row">
+                    <div v-if="hasError('password')" class="row">
                         <div class="col-sm-3"></div>
                         <div class="error-message col-sm-9 px-0">
                             <p class="text-danger text-left">{{ errorContents('password') }}</p>
@@ -121,8 +121,9 @@ export default {
         },
         hasError(val) {
             if (val in this.errors) {
-                return false
+                return true
             }
+                return false
         },
         errorContents(val) {
             const errorContents = this.errors[val]
