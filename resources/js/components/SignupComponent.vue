@@ -11,10 +11,14 @@
                             id="user-id"
                             v-model="user.user_id"
                         />
-                        <div v-if="hasError('user_id')" class="error-message col-sm-12">
-                            <p class="text-danger my-0 pt-1">{{ errorContents('user_id') }}</p>
+                    </div>
+                    <div v-if="hasError('user_id') == false" class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="error-message col-sm-9 px-0">
+                            <p class="text-danger text-left">{{ errorContents('user_id') }}</p>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="email" class="col-sm-3 col-form-label">Email</label>
                         <input
@@ -23,10 +27,14 @@
                             id="email"
                             v-model="user.email"
                         />
-                        <div v-if="hasError('email')" class="error-message col-sm-12">
-                            <p class="text-danger my-0 pt-1">{{ errorContents('email') }}</p>
+                    </div>
+                    <div v-if="hasError('email') == false" class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="error-message col-sm-9 px-0">
+                            <p class="text-danger text-left">{{ errorContents('email') }}</p>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="last-name" class="col-sm-3 col-form-label">LastName</label>
                         <input
@@ -35,10 +43,14 @@
                             id="last-name"
                             v-model="user.last_name"
                         />
-                        <div v-if="hasError('last_name')" class="error-message col-sm-12">
-                            <p class="text-danger my-0 pt-1">{{ errorContents('last_name') }}</p>
+                    </div>
+                    <div v-if="hasError('last_name') == false" class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="error-message col-sm-9 px-0">
+                            <p class="text-danger text-left">{{ errorContents('last_name') }}</p>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="first-name" class="col-sm-3 col-form-label">FirstName</label>
                         <input
@@ -47,10 +59,14 @@
                             id="first-name"
                             v-model="user.first_name"
                         />
-                        <div v-if="hasError('first_name')" class="error-message col-sm-12">
-                            <p class="text-danger my-0 pt-1">{{ errorContents('first_name') }}</p>
+                    </div>
+                    <div v-if="hasError('first_name') == false" class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="error-message col-sm-9 px-0">
+                            <p class="text-danger text-left">{{ errorContents('first_name') }}</p>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="password" class="col-sm-3 col-form-label">Password</label>
                         <input
@@ -59,10 +75,14 @@
                             id="password"
                             v-model="user.password"
                         />
-                        <div v-if="hasError('password')" class="error-message col-sm-12">
-                            <p class="text-danger my-0 pt-1">{{ errorContents('password') }}</p>
+                    </div>
+                    <div v-if="hasError('password') == false" class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="error-message col-sm-9 px-0">
+                            <p class="text-danger text-left">{{ errorContents('password') }}</p>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label
                             for="confirm-password"
@@ -101,12 +121,12 @@ export default {
         },
         hasError(val) {
             if (val in this.errors) {
-                return true
+                return false
             }
         },
         errorContents(val) {
             const errorContents = this.errors[val]
-            return `*${errorContents[0]}`
+            return `* ${errorContents[0]}`
         }
     }
 }
