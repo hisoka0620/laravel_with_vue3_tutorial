@@ -11,6 +11,9 @@
                             id="user-id"
                             v-model="user.user_id"
                         />
+                        <div v-if="hasError('user_id')" class="error-message col-sm-12">
+                            <p class="text-danger my-0 pt-1">{{ errorContents('user_id') }}</p>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="email" class="col-sm-3 col-form-label">Email</label>
@@ -20,6 +23,9 @@
                             id="email"
                             v-model="user.email"
                         />
+                        <div v-if="hasError('email')" class="error-message col-sm-12">
+                            <p class="text-danger my-0 pt-1">{{ errorContents('email') }}</p>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="last-name" class="col-sm-3 col-form-label">LastName</label>
@@ -29,6 +35,9 @@
                             id="last-name"
                             v-model="user.last_name"
                         />
+                        <div v-if="hasError('last_name')" class="error-message col-sm-12">
+                            <p class="text-danger my-0 pt-1">{{ errorContents('last_name') }}</p>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="first-name" class="col-sm-3 col-form-label">FirstName</label>
@@ -38,6 +47,9 @@
                             id="first-name"
                             v-model="user.first_name"
                         />
+                        <div v-if="hasError('first_name')" class="error-message col-sm-12">
+                            <p class="text-danger my-0 pt-1">{{ errorContents('first_name') }}</p>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="password" class="col-sm-3 col-form-label">Password</label>
@@ -47,6 +59,9 @@
                             id="password"
                             v-model="user.password"
                         />
+                        <div v-if="hasError('password')" class="error-message col-sm-12">
+                            <p class="text-danger my-0 pt-1">{{ errorContents('password') }}</p>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label
@@ -71,17 +86,27 @@
 export default {
     data() {
         return {
-            user: {}
+            user: {},
+            errors: []
         }
     },
     methods: {
         submit() {
             axios.post('/api/signup', this.user)
                 .then(() => { this.$router.push({ name: 'task.list' }) })
-                .catch(error => console.log(error.response));
+                .catch(error => this.errors = error.response.data.errors);
         },
         createCancel() {
             this.$router.push({ name: 'task.list' })
+        },
+        hasError(val) {
+            if (val in this.errors) {
+                return true
+            }
+        },
+        errorContents(val) {
+            const errorContents = this.errors[val]
+            return `*${errorContents[0]}`
         }
     }
 }
