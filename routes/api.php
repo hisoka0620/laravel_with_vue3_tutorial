@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,10 @@ Route::put('/tasks/{task}', [TaskController::class, 'update']);
 
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
 
-// register
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
-Route::post('/signup', [RegisterController::class, 'store']);
+Route::get('/user', fn() => Auth::user())->name('user');
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-6">
-                <form @submit.prevent="submit">
-                    <div class="form-group row">
+                <form @submit.prevent="register">
+                    <div class="form-group row" :class="hasError('user_id') ? ' mb-1' : '' ">
                         <label for="user-id" class="col-sm-3 col-form-label">UserID</label>
                         <input
                             type="text"
@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" :class="hasError('email') ? ' mb-1' : '' ">
                         <label for="email" class="col-sm-3 col-form-label">Email</label>
                         <input
                             type="text"
@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" :class="hasError('last_name') ? ' mb-1' : '' ">
                         <label for="last-name" class="col-sm-3 col-form-label">LastName</label>
                         <input
                             type="text"
@@ -51,7 +51,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" :class="hasError('first_name') ? ' mb-1' : '' ">
                         <label for="first-name" class="col-sm-3 col-form-label">FirstName</label>
                         <input
                             type="text"
@@ -67,7 +67,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" :class="hasError('password') ? ' mb-1' : '' ">
                         <label for="password" class="col-sm-3 col-form-label">Password</label>
                         <input
                             type="password"
@@ -106,28 +106,20 @@
 export default {
     data() {
         return {
-            user: {},
-            errors: []
+            user: {}
         }
     },
     methods: {
-        submit() {
-            axios.post('/api/signup', this.user)
-                .then(() => { this.$router.push({ name: 'task.list' }) })
-                .catch(error => this.errors = error.response.data.errors);
+        async register() {
+            await this.$store.dispatch('auth/register', this.user)
         },
         createCancel() {
-            this.$router.push({ name: 'task.list' })
-        },
-        hasError(val) {
-            if (val in this.errors) {
-                return true
-            }
-                return false
-        },
-        errorContents(val) {
-            const errorContents = this.errors[val]
-            return `* ${errorContents[0]}`
+            this.$router.push({ name: 'example' })
+        }
+    },
+    watch: {
+        $route(to, from){
+            this.$store.dispatch('auth/clearError')
         }
     }
 }
