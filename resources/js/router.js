@@ -2,6 +2,7 @@ import {
     createRouter,
     createWebHistory
 } from 'vue-router'
+import store from './store'
 import ExampleComponent from './components/ExampleComponent.vue'
 import TaskListComponent from './components/TaskComponents/TaskListComponent.vue'
 import TaskCompleteComponent from './components/TaskComponents/TaskCompleteComponent.vue'
@@ -11,13 +12,20 @@ import TaskEditComponent from './components/TaskComponents/TaskEditComponent.vue
 import TaskExpiredComponent from './components/TaskComponents/TaskExpiredComponent.vue'
 import RegisterComponent from './components/UserAuthComponents/RegisterComponent.vue'
 import LoginComponent from './components/UserAuthComponents/LoginComponent.vue'
-import store from './store'
 
 function isAuthenticated(to, from, next) {
     if (store.getters['auth/check']) {
-        next('/')
+        next('/tasks')
     } else {
         next()
+    }
+}
+
+function redirectLogin(to, from, next) {
+    if (store.getters['auth/check']) {
+        next()
+    } else {
+        next('/login')
     }
 }
 
@@ -28,7 +36,8 @@ const routes = [{
 }, {
     path: '/register',
     name: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    beforeEnter: isAuthenticated
 }, {
     path: '/login',
     name: 'login',
@@ -37,29 +46,35 @@ const routes = [{
 }, {
     path: '/tasks',
     name: 'task.list',
-    component: TaskListComponent
+    component: TaskListComponent,
+    beforeEnter: redirectLogin
 }, {
     path: '/tasks',
     name: 'task.complete',
     component: TaskCompleteComponent,
+    beforeEnter: redirectLogin
 }, {
     path: '/tasks',
     name: 'task.expired',
     component: TaskExpiredComponent,
+    beforeEnter: redirectLogin
 }, {
     path: '/tasks/create',
     name: 'task.create',
-    component: TaskCreateComponent
+    component: TaskCreateComponent,
+    beforeEnter: redirectLogin
 }, {
     path: '/tasks/:taskId',
     name: 'task.show',
     component: TaskShowComponent,
-    props: true
+    props: true,
+    beforeEnter: redirectLogin
 }, {
     path: '/tasks/:taskId/edit',
     name: 'task.edit',
     component: TaskEditComponent,
-    props: true
+    props: true,
+    beforeEnter: redirectLogin
 }]
 
 const router = createRouter({

@@ -39,28 +39,27 @@ require('./bootstrap');
 import {
     createApp
 } from 'vue'
-import router from './router'
 import store from './store'
+import router from './router'
 import myMixin from './mixins'
 import HeaderComponent from './components/HeaderComponent.vue'
 
 //  Vueインスタンス生成時、認証されたユーザーを取得する
-const currentUser = async () => {
+const getAuthenticateUser = async () => {
+
     await store.dispatch('auth/currentUser')
-    //ここだと正常に取得できる
-    console.log(store.getters['auth/check'])
+
+    const app = createApp({})
+
+    app.mixin(myMixin)
+
+    app.component('header-component', HeaderComponent)
+
+    app.use(store)
+
+    app.use(router)
+
+    app.mount('#app')
 }
 
-const app = createApp({})
-
-app.mixin(myMixin)
-
-app.component('header-component', HeaderComponent)
-
-app.use(currentUser)
-
-app.use(store)
-
-app.use(router)
-
-app.mount('#app')
+getAuthenticateUser()

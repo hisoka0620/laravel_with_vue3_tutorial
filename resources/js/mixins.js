@@ -22,7 +22,7 @@ const myMixin = {
             if (val in store.state.auth.error) {
                 return true
             }
-            return false
+                return false
         },
         errorContents(val) {
             const errorContents = store.state.auth.error[val]
