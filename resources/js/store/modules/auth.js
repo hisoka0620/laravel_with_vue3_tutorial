@@ -2,7 +2,7 @@ import axios from "axios"
 
 const state = {
     user: null,
-    error: []
+    error: null
 }
 
 const getters = {

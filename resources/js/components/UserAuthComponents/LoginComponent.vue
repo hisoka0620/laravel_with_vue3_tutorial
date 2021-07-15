@@ -57,7 +57,7 @@ export default {
             await this.$store.dispatch('auth/login', this.user)
         },
         createCancel() {
-            this.$router.push({ name: 'example' })
+            this.$router.push({ name: 'home' })
         }
     },
     watch: {

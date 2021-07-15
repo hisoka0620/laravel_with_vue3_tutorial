@@ -19,10 +19,13 @@ const myMixin = {
             return moment(val).tz('Asia/Tokyo').format('YYYY-MM-DD HH:mm:ss')
         },
         hasError(val) {
-            if (val in store.state.auth.error) {
-                return true
-            }
+            if (store.state.auth.error === null) {
                 return false
+            } else {
+                if (val in store.state.auth.error) {
+                    return true
+                }
+            }
         },
         errorContents(val) {
             const errorContents = store.state.auth.error[val]

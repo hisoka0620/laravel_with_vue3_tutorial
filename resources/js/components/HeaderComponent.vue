@@ -2,7 +2,7 @@
     <div class="container-fluid bg-dark mb-3">
         <div class="container">
             <nav class="navbar navbar-dark">
-                <router-link :to="{ name: 'example' }">
+                <router-link :to="{ name: 'home' }">
                     <span class="navbar-brand mb-0 h1">Vue Laravel SPA</span>
                 </router-link>
                 <div class="navbar__menu">

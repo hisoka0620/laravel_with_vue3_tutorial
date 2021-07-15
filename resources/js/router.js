@@ -12,6 +12,7 @@ import TaskEditComponent from './components/TaskComponents/TaskEditComponent.vue
 import TaskExpiredComponent from './components/TaskComponents/TaskExpiredComponent.vue'
 import RegisterComponent from './components/UserAuthComponents/RegisterComponent.vue'
 import LoginComponent from './components/UserAuthComponents/LoginComponent.vue'
+import NotFoundComponent from './components/NotFoundComponent.vue'
 
 function isAuthenticated(to, from, next) {
     if (store.getters['auth/check']) {
@@ -31,7 +32,7 @@ function redirectLogin(to, from, next) {
 
 const routes = [{
     path: '/',
-    name: 'example',
+    name: 'home',
     component: ExampleComponent
 }, {
     path: '/register',
@@ -75,11 +76,20 @@ const routes = [{
     component: TaskEditComponent,
     props: true,
     beforeEnter: redirectLogin
+}, {
+    path: '/:pathMatch(.*)',
+    name: 'NotFound',
+    component: NotFoundComponent
 }]
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        return {
+            top: 0
+        }
+    }
 })
 
 export default router
