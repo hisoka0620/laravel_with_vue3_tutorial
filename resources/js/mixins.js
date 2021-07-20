@@ -25,6 +25,7 @@ const myMixin = {
                 if (val in store.state.auth.error) {
                     return true
                 }
+                    return false
             }
         },
         errorContents(val) {
