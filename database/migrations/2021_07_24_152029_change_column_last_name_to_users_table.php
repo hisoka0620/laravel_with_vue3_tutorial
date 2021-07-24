@@ -14,6 +14,10 @@ class ChangeColumnLastNameToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->string('last_name')->nullable();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
             $table->string('last_name')->nullable(false)->change();
         });
     }
