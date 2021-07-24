@@ -14,7 +14,7 @@ class AddColumnUserIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('user_id');
+            $table->string('user_id')->nullable();
         });
     }
 
