@@ -35,11 +35,6 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Login</button>
-                    <button
-                        type="submit"
-                        class="btn btn-secondary mr-2"
-                        @click="createCancel"
-                    >Cancel</button>
                 </form>
             </div>
         </div>
@@ -55,9 +50,6 @@ export default {
     methods: {
         async login() {
             await this.$store.dispatch('auth/login', this.user)
-        },
-        createCancel() {
-            this.$router.push({ name: 'home' })
         }
     },
     watch: {
