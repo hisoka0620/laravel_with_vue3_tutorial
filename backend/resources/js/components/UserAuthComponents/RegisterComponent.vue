@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-sm-6">
                 <form @submit.prevent="register">
-                    <div class="form-group row" :class="hasError('user_id') ? ' mb-1' : '' ">
+                    <div class="form-group row" :class="hasError('user_id') ? ' mb-1' : ''">
                         <label for="user-id" class="col-sm-3 col-form-label">UserID</label>
                         <input
                             type="text"
@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row" :class="hasError('email') ? ' mb-1' : '' ">
+                    <div class="form-group row" :class="hasError('email') ? ' mb-1' : ''">
                         <label for="email" class="col-sm-3 col-form-label">Email</label>
                         <input
                             type="text"
@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row" :class="hasError('last_name') ? ' mb-1' : '' ">
+                    <div class="form-group row" :class="hasError('last_name') ? ' mb-1' : ''">
                         <label for="last-name" class="col-sm-3 col-form-label">LastName</label>
                         <input
                             type="text"
@@ -51,7 +51,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row" :class="hasError('first_name') ? ' mb-1' : '' ">
+                    <div class="form-group row" :class="hasError('first_name') ? ' mb-1' : ''">
                         <label for="first-name" class="col-sm-3 col-form-label">FirstName</label>
                         <input
                             type="text"
@@ -67,7 +67,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row" :class="hasError('password') ? ' mb-1' : '' ">
+                    <div class="form-group row" :class="hasError('password') ? ' mb-1' : ''">
                         <label for="password" class="col-sm-3 col-form-label">Password</label>
                         <input
                             type="password"
@@ -96,7 +96,6 @@
                         />
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Register</button>
-                    <button class="btn btn-secondary" @click="createCancel">Cancel</button>
                 </form>
             </div>
         </div>
@@ -112,13 +111,10 @@ export default {
     methods: {
         async register() {
             await this.$store.dispatch('auth/register', this.user)
-        },
-        createCancel() {
-            this.$router.push({ name: 'home' })
         }
     },
     watch: {
-        $route(to, from){
+        $route(to, from) {
             this.$store.dispatch('auth/clearError')
         }
     }
