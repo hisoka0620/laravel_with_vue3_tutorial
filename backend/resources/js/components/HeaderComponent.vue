@@ -15,7 +15,7 @@
                         <router-link
                             :to="{ name: 'task.complete', query: { completed: true, page: 1 } }"
                         >
-                            <button class="btn btn-success mr-2">Complete</button>
+                            <button class="btn btn-success mr-2">Completed</button>
                         </router-link>
                         <router-link :to="{ name: 'task.list', query: { page: 1 } }">
                             <button class="btn btn-success mr-2">List</button>

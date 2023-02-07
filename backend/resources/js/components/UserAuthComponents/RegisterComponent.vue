@@ -95,7 +95,7 @@
                             v-model="user.password_confirmation"
                         />
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block ml-3">Register</button>
                 </form>
             </div>
         </div>

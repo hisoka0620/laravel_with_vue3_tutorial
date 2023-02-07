@@ -1,4 +1,4 @@
- <template>
+<template>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-6">
@@ -34,10 +34,7 @@
                         />
                     </div>
                     <div class="form-group row">
-                        <label
-                            for="deadtime"
-                            class="col-sm-3 col-form-label"
-                        >Deadline</label>
+                        <label for="deadtime" class="col-sm-3 col-form-label">Deadline</label>
                         <input
                             type="datetime-local"
                             class="col-sm-9 form-control"
@@ -53,23 +50,25 @@
     </div>
 </template>
 
- <script>
+<script>
 export default {
     data() {
         return {
-            task: {}
-        }
+            task: {},
+        };
     },
     methods: {
         submit() {
-            axios.post('/api/tasks', this.task)
+            axios
+                .post("/api/tasks", this.task)
                 .then(() => {
-                    this.$router.push({ name: 'task.list' });
-                }).catch(error => console.log(error.response));
+                    this.$router.push({ name: "task.list" });
+                })
+                .catch((error) => console.log(error.response));
         },
         createCancel() {
-            this.$router.push({ name: 'task.list' });
-        }
-    }
-}
+            this.$router.push({ name: "task.list" });
+        },
+    },
+};
 </script>

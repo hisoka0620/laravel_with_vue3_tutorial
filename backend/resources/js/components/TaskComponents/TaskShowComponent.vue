@@ -23,7 +23,7 @@
                     <p class="col-sm-9 my-auto text-left px-0">{{ getDeadline }}</p>
                 </div>
                 <router-link
-                    :to="{ name: 'task.edit', params: { taskId: task.id } }"
+                    :to="{ name: 'task.edit', params: { taskId: taskId } }"
                     class="btn btn-success mr-1"
                 >Edit</router-link>
                 <button class="btn btn-secondary" @click="backTaskList">Back</button>
@@ -58,9 +58,9 @@ export default {
     computed: {
         getDeadline: {
             get() {
-                if(this.task.deadline == null){
+                if (this.task.deadline == null) {
                     return null
-                }else{
+                } else {
                     return moment(this.task.deadline).format('YYYY-MM-DD HH:mm')
                 }
             }

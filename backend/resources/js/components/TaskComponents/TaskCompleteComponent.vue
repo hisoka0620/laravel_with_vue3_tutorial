@@ -18,7 +18,8 @@
                         :class="addClass('created_at')"
                         @click="sortBy('created_at')"
                     >Created_at</th>
-                    <th scope="col">Cancellation</th>
+                    <th scope="col">Cancel</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +34,10 @@
                     <td :class="dangerClass(task.deadline)">{{ task.deadline }}</td>
                     <td>{{ createTime(task.created_at) }}</td>
                     <td>
-                        <button class="btn btn-danger" @click="cancelComplete(task.id)">Cancel</button>
+                        <button class="btn btn-warning" @click="cancelComplete(task.id)">Cancel</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" @click="deleteComplete(task.id)">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -99,6 +103,12 @@ export default {
             axios.put(`/api/tasks/${id}`, {
                 confirmed: 0
             })
+                .then((res) => {
+                    this.getTasks();
+                });
+        },
+        deleteComplete(id) {
+            axios.delete('/api/tasks/' + id)
                 .then((res) => {
                     this.getTasks();
                 });

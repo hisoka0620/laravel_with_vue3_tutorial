@@ -17,13 +17,16 @@
             font-family: 'Nunito', sans-serif;
             text-align: center;
         }
-        .sort::after{
-            content: " ↕︎"
+
+        .sort::after {
+            content: "↕︎";
         }
-        .asc::after{
+
+        .asc::after {
             content: "↓";
         }
-        .desc::after{
+
+        .desc::after {
             content: "↑";
         }
     </style>

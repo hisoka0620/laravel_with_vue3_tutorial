@@ -34,7 +34,7 @@
                             <p class="text-danger text-left">{{ errorContents('password') }}</p>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Login</button>
+                    <button type="submit" class="btn btn-primary btn-block ml-3">Login</button>
                 </form>
             </div>
         </div>
